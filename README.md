@@ -41,6 +41,21 @@ Foundry Arena is a first-person shooter with online rooms and **text chat with o
 
 Other activities with online features (leaderboards, nicknames, online matches) are switched on but labelled on their cards, activity pages, the teacher page and the privacy page. Switch any of them off the same way.
 
+## New activities are found automatically
+
+Once a day, `.github/workflows/new-activities.yml` checks the GitHub accounts listed under `"watch"` in `site-config.json` (GorzaWebK and GorzaWebA) for public projects with a live GitHub Pages site that aren't on Brain Break Lab yet. For each one it:
+
+- drafts an `activities.json` entry from the project's README and code (description, a guessed category, controls, devices, online features);
+- takes a 640x360 WebP screenshot for the thumbnail;
+- opens a pull request called **New activities: …** (or updates the open one).
+
+**Merge the pull request to publish them.** Nothing goes live without that click, because the descriptions and categories are guesses and new projects may have online features. Anything that looks like it has text chat with other players is added switched off (`"enabled": false`).
+
+- To run the check straight away: **Actions → Look for new activities → Run workflow**.
+- To stop a project being suggested, add its repository name to `"watch" → "ignore"` in `site-config.json`.
+- To watch another account, add it to `"watch" → "accounts"`.
+- To see what's new without changing anything: `node tools/find-new.mjs --list`.
+
 ## Running it locally
 
 `fetch()` doesn't work from `file://`, so serve the folder:
@@ -91,4 +106,5 @@ assets/app.js           all scripts
 assets/favicon.svg
 assets/thumbs/*.webp    640x360 thumbnails, stored here (never hotlinked)
 tools/check.mjs         data check, run in CI before deploy
+tools/find-new.mjs      finds new Pages projects on the watched accounts (daily workflow)
 ```

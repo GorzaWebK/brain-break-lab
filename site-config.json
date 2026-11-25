@@ -6,5 +6,15 @@
     "client": "",
     "slot": "",
     "_comment": "Off by default. Pupils are under 13: if you ever turn this on, ads are shown on the Home page only, at most one slot, child-directed and non-personalised. Read the 'Ads' section of README.md first."
+  },
+  "watch": {
+    "accounts": [
+      "GorzaWebK",
+      "GorzaWebA"
+    ],
+    "ignore": [
+      "brain-break-lab"
+    ],
+    "_comment": "A daily workflow (.github/workflows/new-activities.yml) checks these GitHub accounts for new Pages projects and opens a pull request adding them. Repository names in ignore are never suggested."
   }
 }

@@ -1,0 +1,65 @@
+name: Look for new activities
+
+# Once a day, check the GitHub accounts in site-config.json ("watch") for new
+# GitHub Pages projects. If there are any, draft entries + thumbnails and open
+# (or update) a pull request. Merging it publishes them.
+on:
+  schedule:
+    - cron: '23 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: new-activities
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Look for new Pages projects
+        id: look
+        run: node tools/find-new.mjs --list
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Install the screenshot tools
+        if: steps.look.outputs.count != '0'
+        run: |
+          npm install --no-save --no-package-lock playwright@1.49.1 sharp@0.33.5
+          npx playwright install --with-deps chromium
+
+      - name: Draft entries and thumbnails
+        if: steps.look.outputs.count != '0'
+        run: node tools/find-new.mjs --write --body "$RUNNER_TEMP/pr-body.md"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Check activities.json
+        if: steps.look.outputs.count != '0'
+        run: node tools/check.mjs
+
+      - name: Open or update the pull request
+        if: steps.look.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NAMES: ${{ steps.look.outputs.names }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B auto/new-activities
+          git add activities.json assets/thumbs
+          git commit -m "Add new activities: $NAMES"
+          git push --force origin auto/new-activities
+          if [ -n "$(gh pr list --head auto/new-activities --state open --json number --jq '.[].number')" ]; then
+            gh pr edit auto/new-activities --title "New activities: $NAMES" --body-file "$RUNNER_TEMP/pr-body.md"
+          else
+            gh pr create --base main --head auto/new-activities --title "New activities: $NAMES" --body-file "$RUNNER_TEMP/pr-body.md"
+          fi

@@ -1,5 +1,7 @@
 # Adding an activity
 
+> Projects on GorzaWebK and GorzaWebA are found automatically once a day and suggested in a pull request (see "New activities are found automatically" in README.md). Use the steps below for anything else, or to tidy a suggested entry.
+
 Adding an activity takes **one new entry in `activities.json`** and a thumbnail image. You don't need to change any HTML, CSS or JavaScript.
 
 ## 1. Make the thumbnail
