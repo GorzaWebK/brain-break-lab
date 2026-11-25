@@ -47,7 +47,9 @@ Once a day, `.github/workflows/new-activities.yml` checks the GitHub accounts li
 
 - drafts an `activities.json` entry from the project's README and code (description, a guessed category, controls, devices, online features);
 - takes a 640x360 WebP screenshot for the thumbnail;
-- opens a pull request called **New activities: …** (or updates the open one).
+- puts them on the branch `auto/new-activities` and tells you about it with an issue called **New activities: …** (or updates the open one). The issue has a link: click it, then **Create pull request**, then **Merge**.
+
+GitHub doesn't let workflows open pull requests on their own unless **Settings → Actions → General → Allow GitHub Actions to create and approve pull requests** is ticked. If you tick it, you get a ready-made pull request instead of the issue. It's off by default because it also lets workflows approve pull requests.
 
 **Merge the pull request to publish them.** Nothing goes live without that click, because the descriptions and categories are guesses and new projects may have online features. Anything that looks like it has text chat with other players is added switched off (`"enabled": false`).
 
