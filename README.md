@@ -33,11 +33,11 @@ A calm, tidy website where pupils open short browser activities for brain breaks
 | Gravity.io *(GorzaWebA)* | Physics | computer, tablet, phone | Computer opponents only |
 | Idle Island *(GorzaWebA)* | Strategy | computer, tablet, phone | |
 | Stuntrun *(GorzaWebA)* | Reflex | computer, tablet, phone | |
-| **Foundry Arena** | Arena | computer only | **Switched off by default** (see below) |
+| Foundry Arena | Arena | computer only | Pointer lock; online rooms and **text chat** with other players (see below) |
 
-### Why Foundry Arena is switched off
+### About Foundry Arena
 
-Foundry Arena is a first-person shooter with online rooms and **text chat with other players**, which many schools won't want for under-13s. It stays in `activities.json` with `"enabled": false`, so it doesn't appear anywhere on the site. To turn it on, change that to `true`.
+Foundry Arena is a first-person shooter with online rooms and **text chat with other players**, which many schools won't want for under-13s. It was off by default and has been switched on. To hide it again, set `"enabled": false` for it in `activities.json`.
 
 Other activities with online features (leaderboards, nicknames, online matches) are switched on but labelled on their cards, activity pages, the teacher page and the privacy page. Switch any of them off the same way.
 

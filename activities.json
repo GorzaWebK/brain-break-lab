@@ -469,8 +469,8 @@
     "needsSound": false,
     "pcOnly": true,
     "hasOnline": true,
-    "onlineNote": "A first-person shooter with online rooms and text chat with other players. Turned off by default.",
-    "enabled": false
+    "onlineNote": "A first-person shooter with online rooms and text chat with other players.",
+    "enabled": true
   },
   {
     "id": "borderfall",
