@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>For teachers · Brain Break Lab</title>
+  <meta name="description" content="Information for teachers and IT staff about Brain Break Lab.">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="teachers">
+  <a class="skip-link" href="#main">Skip to the content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./" aria-label="Brain Break Lab home">
+        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#4f46e5"/><path d="M24 9a11 11 0 0 0-6.5 19.9c1 .8 1.5 1.9 1.5 3.1v1h10v-1c0-1.2.5-2.3 1.5-3.1A11 11 0 0 0 24 9z" fill="#ffc93c"/><rect x="19" y="35" width="10" height="4" rx="2" fill="#fff"/><path d="M21 22l3 3 3-3" fill="none" stroke="#4f46e5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Brain Break Lab
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="./">Activities</a>
+        <a href="teachers.html" aria-current="page">For teachers</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="prose">
+      <h1>For teachers</h1>
+      <p>Brain Break Lab is a small collection of browser activities for short brain breaks: logic, strategy, rhythm, reflex and physics challenges. There are <strong id="t-count">several</strong> activities switched on. Pupils don't need an account, nothing is installed, and this site collects no personal data.</p>
+      <p>Each activity is a separate project hosted on GitHub Pages and shown here in an embedded frame. This site is plain HTML, CSS and JavaScript with no ads, trackers, pop-ups or outside fonts.</p>
+      <div id="t-error"></div>
+
+      <h2>Good for quiet time (no timer)</h2>
+      <p>These activities have no timer and no rush, so pupils can take as long as they like over every move.</p>
+      <ul id="t-calm"><li>Loading…</li></ul>
+
+      <h2>Needs sound or headphones</h2>
+      <ul id="t-sound"><li>Loading…</li></ul>
+      <p>All other activities work fine with the sound off. Most have a mute key (usually M).</p>
+
+      <h2>Computer only (keyboard and mouse)</h2>
+      <ul id="t-pc"><li>Loading…</li></ul>
+      <p>On a phone or tablet these show a "please use a computer" message instead of the activity.</p>
+
+      <h2>Works on tablets</h2>
+      <ul id="t-tablet"><li>Loading…</li></ul>
+
+      <h2>Activities with online features</h2>
+      <p>These features are optional, but you may want to know about them. None of the switched-on activities has text chat.</p>
+      <ul id="t-online"><li>Loading…</li></ul>
+
+      <h2>Switched off</h2>
+      <ul id="t-off"><li>Loading…</li></ul>
+      <div class="callout"><p style="margin:0">Whoever looks after this site can switch any activity on or off by changing <code>enabled</code> in <code>activities.json</code>. Nothing else needs to change.</p></div>
+
+      <h2>For IT: what to allow</h2>
+      <p>To use the site, allow these hosts. The first is this site; the others host the activities.</p>
+      <pre class="url-list" id="t-hosts">Loading…</pre>
+      <p>Every activity address:</p>
+      <pre class="url-list" id="t-urls">Loading…</pre>
+      <p><button type="button" class="btn btn-ghost btn-small" id="copy-urls">Copy the list</button></p>
+      <p>Some activities also use a few outside services. If these are blocked, the activities still run, but a few extras won't:</p>
+      <ul>
+        <li><strong>fonts.googleapis.com</strong> and <strong>fonts.gstatic.com</strong>: optional fonts used inside some activities (they fall back to standard fonts).</li>
+        <li><strong>cdnjs.cloudflare.com</strong>: Orb Dash loads its 3D engine from here and won't start without it.</li>
+        <li><strong>Google Firebase</strong> (<code>*.firebaseio.com</code>, <code>*.firebasedatabase.app</code>, <code>www.gstatic.com</code>) and <strong>PeerJS</strong>: the online leaderboards and online matches listed above. Blocking these turns those online features off.</li>
+      </ul>
+    </div>
+
+    <h2 style="margin-top:2em">All activities at a glance</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Activity</th><th scope="col">Category</th><th scope="col">Devices</th><th scope="col">No timer</th><th scope="col">Needs sound</th><th scope="col">Online features</th><th scope="col">Address</th></tr></thead>
+        <tbody id="t-table"><tr><td colspan="7">Loading…</td></tr></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Brain Break Lab · no accounts, no personal data</span>
+      <nav aria-label="Footer">
+        <a href="./">Activities</a>
+        <a href="teachers.html">For teachers</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="assets/app.js"></script>
+</body>
+</html>

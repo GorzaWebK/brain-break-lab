@@ -1,0 +1,667 @@
+[
+  {
+    "id": "felt-links",
+    "title": "Felt Links",
+    "description": "Flick a woolly pompom across felt and patchwork courses and sink it in as few strokes as you can.",
+    "category": "Physics",
+    "url": "https://gorzawebk.github.io/Felt-Links/",
+    "thumbnail": "assets/thumbs/felt-links.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "mouse",
+      "keyboard",
+      "touch",
+      "gamepad"
+    ],
+    "controls": [
+      {
+        "action": "Aim and set power",
+        "how": "Press and pull back like a catapult, or ← → to aim and ↑ ↓ for power"
+      },
+      {
+        "action": "Shoot",
+        "how": "Let go, or Space / Enter"
+      },
+      {
+        "action": "See the whole hole",
+        "how": "⤢ button or O"
+      },
+      {
+        "action": "Restart the hole",
+        "how": "↺ button or R"
+      },
+      {
+        "action": "Pause",
+        "how": "Ⅱ button, Esc or P"
+      },
+      {
+        "action": "Mute",
+        "how": "M"
+      }
+    ],
+    "noTimer": true,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  },
+  {
+    "id": "paper-tides",
+    "title": "Paper Tides",
+    "description": "Grow a little seaside village one hex tile at a time and keep it safe from the rising tide. Take as long as you like over each move.",
+    "category": "Strategy",
+    "url": "https://gorzawebk.github.io/Paper-Tides/",
+    "thumbnail": "assets/thumbs/paper-tides.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "mouse",
+      "keyboard",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Preview a tile",
+        "how": "Point at a hex, or tap it once"
+      },
+      {
+        "action": "Place the tile",
+        "how": "Click, or tap the same hex again"
+      },
+      {
+        "action": "Pick a tile",
+        "how": "1, 2 or 3, or tap it in the logbook"
+      },
+      {
+        "action": "Rotate",
+        "how": "R (Shift+R the other way), or the Rotate button"
+      },
+      {
+        "action": "Undo",
+        "how": "Z or the Undo button (once per turn)"
+      },
+      {
+        "action": "Zoom and move the map",
+        "how": "Mouse wheel or + / −, drag; pinch on touch"
+      }
+    ],
+    "noTimer": true,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  },
+  {
+    "id": "blueprint-heist",
+    "title": "Blueprint Heist",
+    "description": "You are a small red pencil mark on a blueprint. Plan a route past guards, cameras and lasers, collect the target and get out unseen.",
+    "category": "Logic",
+    "url": "https://gorzawebk.github.io/Blueprint-Heist/",
+    "thumbnail": "assets/thumbs/blueprint-heist.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "touch",
+      "gamepad"
+    ],
+    "controls": [
+      {
+        "action": "Move",
+        "how": "WASD or arrow keys; on touch, drag on the left half of the screen"
+      },
+      {
+        "action": "Sneak (slow and silent)",
+        "how": "Hold Shift, or hold SNEAK"
+      },
+      {
+        "action": "Sprint (noisy)",
+        "how": "Hold Space, or hold SPRINT"
+      },
+      {
+        "action": "Use (lock, fuse box, uniform)",
+        "how": "E or Enter, or USE"
+      },
+      {
+        "action": "Throw a coin",
+        "how": "Q, or THROW"
+      },
+      {
+        "action": "Pause / mute",
+        "how": "Esc or P / M"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  },
+  {
+    "id": "leadlight",
+    "title": "Leadlight",
+    "description": "Pinball inside a giant stained-glass window. Every bumper you hit lights up more of the glass until the whole window glows.",
+    "category": "Physics",
+    "url": "https://gorzawebk.github.io/Leadlight/",
+    "thumbnail": "assets/thumbs/leadlight.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "touch",
+      "gamepad"
+    ],
+    "controls": [
+      {
+        "action": "Left flipper",
+        "how": "← or Z, or hold the left half of the screen"
+      },
+      {
+        "action": "Right flipper",
+        "how": "→ or /, or hold the right half of the screen"
+      },
+      {
+        "action": "Launch the ball",
+        "how": "Hold Space or ↓ and let go, or hold the bottom-right lane"
+      },
+      {
+        "action": "Nudge",
+        "how": "Shift or ↑, or swipe up"
+      },
+      {
+        "action": "Pause / mute",
+        "how": "Esc or P / M"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  },
+  {
+    "id": "needle-drop",
+    "title": "Needle Drop",
+    "description": "A rhythm activity on a spinning vinyl record: tap, hold and scratch the notes in time with the music as they reach the needle.",
+    "category": "Rhythm",
+    "url": "https://gorzawebk.github.io/Needle-Drop/",
+    "thumbnail": "assets/thumbs/needle-drop.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "touch",
+      "gamepad"
+    ],
+    "controls": [
+      {
+        "action": "Inner groove (drums)",
+        "how": "F, or tap the inner ring"
+      },
+      {
+        "action": "Middle groove (bass)",
+        "how": "J, or tap the middle ring"
+      },
+      {
+        "action": "Outer groove (melody)",
+        "how": "K, or tap the outer ring"
+      },
+      {
+        "action": "Scratch",
+        "how": "Space, or swipe"
+      },
+      {
+        "action": "Pause / mute",
+        "how": "Esc or P / M"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": true,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  },
+  {
+    "id": "hop-across",
+    "title": "Hop Across",
+    "description": "Hop across busy roads, railways and rivers. Time each hop carefully and see how far you can get.",
+    "category": "Reflex",
+    "url": "https://gorzawebk.github.io/hop-across/",
+    "thumbnail": "assets/thumbs/hop-across.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Hop forward",
+        "how": "↑ or W, or tap / swipe up"
+      },
+      {
+        "action": "Hop back",
+        "how": "↓ or S, or swipe down"
+      },
+      {
+        "action": "Hop left / right",
+        "how": "← → or A D, or swipe left / right"
+      },
+      {
+        "action": "Start / try again",
+        "how": "Space or Enter, or tap"
+      },
+      {
+        "action": "Mute",
+        "how": "M or the speaker button"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  },
+  {
+    "id": "orb-dash",
+    "title": "Orb Dash",
+    "description": "Roll a glowing orb along a floating track in space, switching lanes and jumping gaps as the speed climbs.",
+    "category": "Reflex",
+    "url": "https://gorzawebk.github.io/orb-dash/",
+    "thumbnail": "assets/thumbs/orb-dash.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Change lane",
+        "how": "A / D or ← / →, or swipe left / right"
+      },
+      {
+        "action": "Jump",
+        "how": "Space, or tap"
+      },
+      {
+        "action": "Try again / home",
+        "how": "R / H, or the buttons"
+      },
+      {
+        "action": "Mute",
+        "how": "M"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": true,
+    "onlineNote": "Has an optional global high-score table: pupils can type a username, which other players can see. It also needs cdnjs.cloudflare.com to load.",
+    "enabled": true
+  },
+  {
+    "id": "redline",
+    "title": "Redline",
+    "description": "A time-trial racing activity. Pick a circuit, learn the best line round the corners and try to beat your own ghost car.",
+    "category": "Reflex",
+    "url": "https://gorzawebk.github.io/Redline/",
+    "thumbnail": "assets/thumbs/redline.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "touch",
+      "gamepad"
+    ],
+    "controls": [
+      {
+        "action": "Accelerate / brake",
+        "how": "W / S or ↑ / ↓, or GAS / BRAKE on touch"
+      },
+      {
+        "action": "Steer",
+        "how": "A D or ← →, or ◀ ▶ on touch"
+      },
+      {
+        "action": "Handbrake (drift)",
+        "how": "Space, or DRIFT on touch"
+      },
+      {
+        "action": "Back on the track",
+        "how": "C, or RESET on touch"
+      },
+      {
+        "action": "Restart / pause",
+        "how": "R / Esc"
+      },
+      {
+        "action": "Change camera",
+        "how": "V, or CAM on touch"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": true,
+    "onlineNote": "Has online leaderboards with a driver name pupils choose, shared circuits made by other players, and optional online races with friends using a room code. There is no text chat.",
+    "enabled": true
+  },
+  {
+    "id": "skyhook",
+    "title": "Skyhook",
+    "description": "A 3D grappling-hook challenge: fire your hook at orange blocks, swing, let go and fly to the finish as fast as you can.",
+    "category": "Reflex",
+    "url": "https://gorzawebk.github.io/Skyhook/",
+    "thumbnail": "assets/thumbs/skyhook.webp",
+    "devices": [
+      "computer"
+    ],
+    "inputs": [
+      "keyboard",
+      "mouse"
+    ],
+    "controls": [
+      {
+        "action": "Look and aim",
+        "how": "Mouse (click the activity to lock the pointer)"
+      },
+      {
+        "action": "Fire the hook and hold on",
+        "how": "Hold left click; let go to fling"
+      },
+      {
+        "action": "Reel in",
+        "how": "Hold right click or Shift"
+      },
+      {
+        "action": "Steer in the air",
+        "how": "W A S D"
+      },
+      {
+        "action": "Jump",
+        "how": "Space"
+      },
+      {
+        "action": "Restart / last checkpoint",
+        "how": "R / C"
+      },
+      {
+        "action": "Pause (and free the mouse)",
+        "how": "Esc"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": true,
+    "hasOnline": true,
+    "onlineNote": "Has online leaderboards with a player name pupils choose, and world-record ghost runs. There is no text chat.",
+    "enabled": true
+  },
+  {
+    "id": "foundry-arena",
+    "title": "Foundry Arena",
+    "description": "A 3D team arena in a steelworks, against computer players or friends.",
+    "category": "Arena",
+    "url": "https://gorzawebk.github.io/FOUNDRY-ARENA/",
+    "thumbnail": "assets/thumbs/foundry-arena.webp",
+    "devices": [
+      "computer"
+    ],
+    "inputs": [
+      "keyboard",
+      "mouse"
+    ],
+    "controls": [
+      {
+        "action": "Move",
+        "how": "W A S D"
+      },
+      {
+        "action": "Look",
+        "how": "Mouse (pointer lock)"
+      },
+      {
+        "action": "Fire / aim",
+        "how": "Left click / right click"
+      },
+      {
+        "action": "Jump / sprint / crouch",
+        "how": "Space / Shift / C"
+      },
+      {
+        "action": "Pause (and free the mouse)",
+        "how": "Esc"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": true,
+    "hasOnline": true,
+    "onlineNote": "A first-person shooter with online rooms and text chat with other players. Turned off by default.",
+    "enabled": false
+  },
+  {
+    "id": "borderfall",
+    "title": "Borderfall",
+    "description": "Guide a nation from the year 1500 to the space age on a real world map: research technology, grow your population and expand your borders.",
+    "category": "Strategy",
+    "url": "https://gorzaweba.github.io/Borderfall/",
+    "thumbnail": "assets/thumbs/borderfall.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "mouse",
+      "keyboard",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Expand or send a fleet",
+        "how": "Click a spot on the map"
+      },
+      {
+        "action": "More options for a spot",
+        "how": "Right-click, or long-press on touch"
+      },
+      {
+        "action": "Move and zoom the map",
+        "how": "Drag, mouse wheel or pinch; WASD or arrows"
+      },
+      {
+        "action": "Choose a building",
+        "how": "1 – 9"
+      },
+      {
+        "action": "Technology / diplomacy / government",
+        "how": "T / P / G"
+      },
+      {
+        "action": "Pause",
+        "how": "Space"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": true,
+    "onlineNote": "Includes conquest and missiles. Has optional online matches (with friends by code, or public games with strangers), a leaderboard and optional Google sign-in. There is no text chat.",
+    "enabled": true
+  },
+  {
+    "id": "gravity",
+    "title": "Gravity.io",
+    "description": "Start as a tiny space rock, pull in everything lighter than you and grow into a planet, a star and finally a black hole.",
+    "category": "Physics",
+    "url": "https://gorzaweba.github.io/Gravity.io/",
+    "thumbnail": "assets/thumbs/gravity.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "mouse",
+      "keyboard",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Steer",
+        "how": "Point the mouse, or W A S D; drag on touch"
+      },
+      {
+        "action": "Boost",
+        "how": "Hold Space or left click, or hold Boost"
+      },
+      {
+        "action": "Gravity surge",
+        "how": "E, Shift or right click, or tap Surge"
+      },
+      {
+        "action": "Pause / mute",
+        "how": "Esc / M"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  },
+  {
+    "id": "idle-island",
+    "title": "Idle Island",
+    "description": "Build up a small island and plan where to place houses, towers and walls so your squads can defend the beaches from raiders.",
+    "category": "Strategy",
+    "url": "https://gorzaweba.github.io/Idle-Island/",
+    "thumbnail": "assets/thumbs/idle-island.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "mouse",
+      "keyboard",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Inspect or upgrade a building",
+        "how": "Click or tap it"
+      },
+      {
+        "action": "Place a building",
+        "how": "Pick it in Build, then click a tile (tap twice on touch)"
+      },
+      {
+        "action": "Orbit / pan the island",
+        "how": "Drag / right-drag, two-finger drag or W A S D"
+      },
+      {
+        "action": "Zoom",
+        "how": "Mouse wheel, pinch, or + −"
+      },
+      {
+        "action": "Rotate the view",
+        "how": "Q / E"
+      },
+      {
+        "action": "Pause",
+        "how": "Space"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  },
+  {
+    "id": "stuntrun",
+    "title": "Stuntrun",
+    "description": "Drive a stunt car through loops, wall rides and big jumps against the clock, then design your own track in the editor.",
+    "category": "Reflex",
+    "url": "https://gorzaweba.github.io/Stuntrun/",
+    "thumbnail": "assets/thumbs/stuntrun.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "touch",
+      "gamepad"
+    ],
+    "controls": [
+      {
+        "action": "Accelerate / brake",
+        "how": "W / S or ↑ / ↓, or ▲ / ▼ on touch"
+      },
+      {
+        "action": "Steer",
+        "how": "A D or ← →, or ◀ ▶ on touch"
+      },
+      {
+        "action": "Drift",
+        "how": "Hold Space or Shift, or the Drift button"
+      },
+      {
+        "action": "Back to last checkpoint",
+        "how": "R or Enter, or ↺"
+      },
+      {
+        "action": "Restart from the start",
+        "how": "R twice quickly"
+      },
+      {
+        "action": "Pause / camera",
+        "how": "Esc or P / C"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  }
+]

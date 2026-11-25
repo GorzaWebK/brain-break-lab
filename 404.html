@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found · Brain Break Lab</title>
+  <meta name="robots" content="noindex">
+  <!-- Self-contained on purpose: GitHub Pages serves this file at any missing
+       path, so relative links to assets/ may not resolve from here. -->
+  <style>
+    :root { --ink: #1d2340; --soft: #4a5170; --brand: #4f46e5; --brand-dark: #3730a3; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px 16px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: var(--ink);
+      background: linear-gradient(135deg, #eef0ff 0%, #fff6dc 100%); }
+    .box { background: #fff; border: 1px solid #dfe3ef; border-radius: 20px; padding: 32px 24px; max-width: 460px; width: 100%; text-align: center;
+      box-shadow: 0 4px 14px rgba(29, 35, 64, .08); }
+    svg { width: 64px; height: 64px; }
+    h1 { font-size: 1.6rem; margin: 12px 0 8px; }
+    p { color: var(--soft); margin: 0 0 20px; line-height: 1.5; }
+    a { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 20px; border-radius: 999px; background: var(--brand);
+      color: #fff; font-weight: 700; text-decoration: none; }
+    a:hover { background: var(--brand-dark); }
+    a:focus-visible { outline: 3px solid #f59e0b; outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <main class="box">
+    <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#4f46e5"/><path d="M24 9a11 11 0 0 0-6.5 19.9c1 .8 1.5 1.9 1.5 3.1v1h10v-1c0-1.2.5-2.3 1.5-3.1A11 11 0 0 0 24 9z" fill="#ffc93c"/><rect x="19" y="35" width="10" height="4" rx="2" fill="#fff"/><path d="M21 22l3 3 3-3" fill="none" stroke="#4f46e5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h1>We couldn’t find that page</h1>
+    <p>The link may be old or mistyped. Head back to Brain Break Lab to pick an activity.</p>
+    <a id="home" href="./">Back to Home</a>
+  </main>
+  <script>
+    // On https://<user>.github.io/<repo>/any/missing/path, point Home at /<repo>/.
+    (function () {
+      var seg = location.pathname.split('/').filter(Boolean);
+      if (/\.github\.io$/.test(location.hostname) && seg.length) {
+        document.getElementById('home').href = '/' + seg[0] + '/';
+      }
+    })();
+  </script>
+</body>
+</html>
