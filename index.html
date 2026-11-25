@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Brain Break Lab</title>
   <meta name="description" content="Short brain-break activities for the classroom: logic, strategy, rhythm, reflex and physics challenges that open in the browser.">
-  <meta name="theme-color" content="#4f46e5">
+  <meta name="theme-color" content="#5b3df5">
   <meta property="og:title" content="Brain Break Lab">
   <meta property="og:description" content="Short brain-break activities for the classroom.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -16,7 +16,7 @@
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="./" aria-label="Brain Break Lab home">
-        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#4f46e5"/><path d="M24 9a11 11 0 0 0-6.5 19.9c1 .8 1.5 1.9 1.5 3.1v1h10v-1c0-1.2.5-2.3 1.5-3.1A11 11 0 0 0 24 9z" fill="#ffc93c"/><rect x="19" y="35" width="10" height="4" rx="2" fill="#fff"/><path d="M21 22l3 3 3-3" fill="none" stroke="#4f46e5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#5b3df5"/><path d="M24 9a11 11 0 0 0-6.5 19.9c1 .8 1.5 1.9 1.5 3.1v1h10v-1c0-1.2.5-2.3 1.5-3.1A11 11 0 0 0 24 9z" fill="#ffc93c"/><rect x="19" y="35" width="10" height="4" rx="2" fill="#fff"/><path d="M21 22l3 3 3-3" fill="none" stroke="#5b3df5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Brain Break Lab
       </a>
       <nav class="site-nav" aria-label="Main">
@@ -29,8 +29,43 @@
 
   <main id="main" class="wrap">
     <section class="hero" aria-labelledby="hero-h">
-      <h1 id="hero-h">Time for a brain break</h1>
-      <p>Pick an activity, press Open, and come back refreshed. Logic, strategy, rhythm, reflex and physics challenges that run right in the browser.</p>
+      <div>
+        <h1 id="hero-h">Time for a <span class="hl">brain break</span></h1>
+        <p>Pick an activity, press Open, and come back refreshed. Logic, strategy, rhythm, reflex and physics challenges that run right in the browser.</p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-sun" id="surprise" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
+            Surprise me
+          </button>
+          <a class="btn btn-glass" href="#all-h">See them all</a>
+        </div>
+        <ul class="hero-facts">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"/></svg>No sign-up</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"/></svg>Nothing to install</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"/></svg>No personal data</li>
+        </ul>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 400 300" focusable="false">
+          <g class="orbit" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="2" stroke-dasharray="4 10" stroke-linecap="round"><ellipse cx="200" cy="150" rx="170" ry="120"/></g>
+          <ellipse cx="200" cy="268" rx="96" ry="12" fill="rgba(27,22,64,.35)"/>
+          <!-- flask -->
+          <path d="M172 52h56v14h-6v52l58 104c8 15-3 34-20 34H140c-17 0-28-19-20-34l58-104V66h-6z" fill="rgba(255,255,255,.18)" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+          <path d="M146 182h108l26 44c6 11-2 24-14 24H134c-12 0-20-13-14-24z" fill="#2dd4bf"/>
+          <path d="M146 182h108l6 10H140z" fill="#7cf0dd"/>
+          <circle class="float" cx="178" cy="222" r="9" fill="#fff" opacity=".85"/>
+          <circle class="float b" cx="216" cy="206" r="6" fill="#fff" opacity=".7"/>
+          <circle class="float c" cx="236" cy="232" r="4" fill="#fff" opacity=".7"/>
+          <rect x="166" y="44" width="68" height="14" rx="7" fill="#fff"/>
+          <!-- floating shapes -->
+          <g class="float"><circle cx="70" cy="86" r="22" fill="#ffc93c"/><circle cx="70" cy="86" r="9" fill="#5b3df5"/></g>
+          <g class="float b"><path d="M330 60l14 26h-28z" fill="#ff6b5b" transform="rotate(12 330 76)"/></g>
+          <g class="float c"><rect x="312" y="190" width="34" height="34" rx="8" fill="#fff" transform="rotate(18 329 207)"/><rect x="321" y="199" width="16" height="16" rx="3" fill="#5b3df5" transform="rotate(18 329 207)"/></g>
+          <g class="float b"><path d="M58 200v-34l26-6v32" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="52" cy="200" r="8" fill="#fff"/><circle cx="78" cy="192" r="8" fill="#fff"/></g>
+          <g class="float"><path d="M290 130l5 12 13 1-10 8 3 13-11-7-11 7 3-13-10-8 13-1z" fill="#ffc93c"/></g>
+          <g class="float c"><path d="M112 34l-10 22h10l-6 18 18-26h-11l7-14z" fill="#ffc93c"/></g>
+        </svg>
+      </div>
     </section>
 
     <section class="recent" id="recent" aria-labelledby="recent-h" hidden>
@@ -43,20 +78,19 @@
 
     <section aria-labelledby="all-h">
       <div class="section-head"><h2 id="all-h">All activities</h2><p class="result-count" id="count" aria-live="polite"></p></div>
-      <div class="toolbar">
-        <div class="search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <label class="sr-only" for="search">Search activities</label>
-          <input type="search" id="search" placeholder="Search activities" autocomplete="off" spellcheck="false">
-        </div>
-        <div class="chips" role="group" aria-label="Filter activities">
-          <div class="chips" id="chips" role="group" aria-label="Category"></div>
-          <span class="divider" aria-hidden="true"></span>
+      <div class="toolbar" role="group" aria-label="Filter activities">
+        <div class="toolbar-row">
+          <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <label class="sr-only" for="search">Search activities</label>
+            <input type="search" id="search" placeholder="Search activities" autocomplete="off" spellcheck="false">
+          </div>
           <button type="button" class="chip chip-toggle" id="tablet-filter" aria-pressed="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M11 18h2"/></svg>
             Works on tablets
           </button>
         </div>
+        <div class="chips" id="chips" role="group" aria-label="Category"></div>
       </div>
 
       <ul class="grid" id="grid" aria-label="Activities"></ul>

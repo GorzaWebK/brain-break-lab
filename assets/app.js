@@ -105,6 +105,17 @@
       buildChips();
       render();
       renderRecent();
+      // "Surprise me" opens a random activity that suits this device.
+      var surprise = $('#surprise');
+      if (surprise && all.length) {
+        surprise.hidden = false;
+        surprise.addEventListener('click', function () {
+          var pool = isTouchOnly() ? all.filter(function (a) { return !a.pcOnly; }) : all;
+          if (!pool.length) pool = all;
+          var pick = pool[Math.floor(Math.random() * pool.length)];
+          location.href = 'activity.html?id=' + encodeURIComponent(pick.id);
+        });
+      }
     }).catch(function (e) { showError(grid, 'The list of activities could not be loaded. Try refreshing the page.'); console.warn(e); });
 
     getJSON('site-config.json').then(maybeLoadAds).catch(function () { /* ads stay off */ });
@@ -146,11 +157,11 @@
     }
 
     function card(a) {
-      return '<li class="card">' +
-        '<div class="thumb"><img src="' + esc(a.thumbnail) + '" alt="' + esc('Screenshot of ' + a.title) + '" width="640" height="360" loading="lazy" decoding="async"></div>' +
+      return '<li class="card" data-cat="' + esc(a.category) + '">' +
+        '<div class="thumb"><img src="' + esc(a.thumbnail) + '" alt="" width="640" height="360" loading="lazy" decoding="async">' +
+          '<div class="badges"><span class="badge">' + esc(a.category) + '</span>' +
+            (a.noTimer ? '<span class="badge badge-calm">No timer</span>' : '') + '</div></div>' +
         '<div class="card-body">' +
-          '<div class="badges"><span class="badge" data-cat="' + esc(a.category) + '">' + esc(a.category) + '</span>' +
-            (a.noTimer ? '<span class="badge badge-calm">No timer</span>' : '') + '</div>' +
           '<h3><a href="activity.html?id=' + encodeURIComponent(a.id) + '">' + esc(a.title) + '</a></h3>' +
           '<p>' + esc(a.description) + '</p>' +
           '<div class="card-meta"><div class="badges">' + deviceIcons(a) + '</div>' +
@@ -272,6 +283,7 @@
             '<a class="btn btn-ghost" href="' + esc(a.url) + '" target="_blank" rel="noopener">' + ICON.newtab + 'Open in new tab</a>' +
           '</div></div>';
 
+      root.setAttribute('data-cat', a.category); // category colour for the frame, buttons and panels
       root.innerHTML =
         '<div class="activity-top">' +
           '<a class="btn btn-ghost" href="./">' + ICON.back + 'Back</a>' +
