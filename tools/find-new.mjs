@@ -99,7 +99,9 @@ function readmeIntro(md) {
 const KEYISH = /arrow|key|space|click|tap|wasd|mouse|drag|swipe|shift|enter|esc|ctrl|scroll|touch|[←→↑↓]|^[a-z0-9]( |$)|^[A-Z]$/i;
 function readmeControls(md) {
   const lines = md.split('\n');
-  const start = lines.findIndex(l => /^#{1,6}\s*(controls|how to play|how to use|keys|keyboard)/i.test(l));
+  // Prefer a "Controls" section; "How to play" is only a fallback (it is often prose).
+  let start = lines.findIndex(l => /^#{1,6}\s*(controls|keys|keyboard)\b/i.test(l));
+  if (start < 0) start = lines.findIndex(l => /^#{1,6}\s*(how to play|how to use)/i.test(l));
   if (start < 0) return [];
   const rows = [];
   let lastWasTable = false;
@@ -111,7 +113,8 @@ function readmeControls(md) {
       if (/^\|[\s:|-]+\|$/.test(l)) { if (lastWasTable) rows.pop(); lastWasTable = false; continue; } // header row
       const cells = l.split('|').slice(1, -1).map(c => stripMd(c)).filter(Boolean);
       if (cells.length < 2) continue;
-      [a, b] = cells;
+      // First column is usually the action; join the rest (e.g. "Mouse / touch" and "Keyboard").
+      [a, b] = [cells[0], cells.slice(1).join(', or ')];
       lastWasTable = true;
     } else {
       const m = l.match(/^[-*+]\s+(.+?)\s+(?:[—–-]|:)\s+(.+)$/) || l.match(/^[-*+]\s+\*\*(.+?)\*\*:?\s*(.+)$/);
@@ -119,7 +122,8 @@ function readmeControls(md) {
       [a, b] = [stripMd(m[1]).replace(/:$/, ''), stripMd(m[2])];
     }
     if (!a || !b || /^(action|control|key|input)s?$/i.test(a)) continue;
-    const [how, action] = KEYISH.test(a) && !KEYISH.test(b) ? [a, b] : KEYISH.test(b) && !KEYISH.test(a) ? [b, a] : [a, b];
+    // Normally "action | how"; swap only when the first part clearly names keys and the second doesn't.
+    const [how, action] = KEYISH.test(a) && !KEYISH.test(b) ? [a, b] : [b, a];
     rows.push({ action: clean(action), how: clean(how) });
     if (rows.length >= 8) break;
   }

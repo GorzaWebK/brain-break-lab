@@ -25,6 +25,26 @@ jobs:
         with:
           node-version: 22
 
+      # If a suggestion is still open (a pull request, or an issue when workflows
+      # can't open pull requests), build on its branch so any edits made to it are
+      # kept, and only projects it doesn't already include are added.
+      - name: Carry on from an open suggestion
+        id: open
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PR="$(gh pr list --head auto/new-activities --state open --json number --jq '.[0].number')"
+          ISSUE="$(gh issue list --state open --search 'in:title "New activities"' --json number --jq '.[0].number')"
+          if { [ -n "$PR" ] || [ -n "$ISSUE" ]; } && git ls-remote --exit-code --heads origin auto/new-activities > /dev/null; then
+            MAIN_SHA="$(git rev-parse HEAD)"
+            git fetch origin auto/new-activities
+            git checkout -B auto/new-activities origin/auto/new-activities
+            git checkout "$MAIN_SHA" -- tools   # always run the latest scanner and checks from main
+            echo "pr=$PR" >> "$GITHUB_OUTPUT"
+            echo "issue=$ISSUE" >> "$GITHUB_OUTPUT"
+            echo "Carrying on from the open suggestion (pull request: ${PR:-none}, issue: ${ISSUE:-none})."
+          fi
+
       - name: Look for new Pages projects
         id: look
         run: node tools/find-new.mjs --list
@@ -52,17 +72,29 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           NAMES: ${{ steps.look.outputs.names }}
+          OPEN_PR: ${{ steps.open.outputs.pr }}
+          OPEN_ISSUE: ${{ steps.open.outputs.issue }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B auto/new-activities
           git add activities.json assets/thumbs
           git commit -m "Add new activities: $NAMES"
+          if [ -n "$OPEN_PR" ] || [ -n "$OPEN_ISSUE" ]; then
+            # Adding to an open suggestion: keep what's there and post the new drafts as a comment.
+            git push origin auto/new-activities
+            if [ -n "$OPEN_PR" ]; then
+              gh pr edit "$OPEN_PR" --title "$(gh pr view "$OPEN_PR" --json title --jq .title), $NAMES"
+              gh pr comment "$OPEN_PR" --body-file "$RUNNER_TEMP/pr-body.md"
+            else
+              gh issue edit "$OPEN_ISSUE" --title "$(gh issue view "$OPEN_ISSUE" --json title --jq .title), $NAMES"
+              gh issue comment "$OPEN_ISSUE" --body-file "$RUNNER_TEMP/pr-body.md"
+            fi
+            exit 0
+          fi
           git push --force origin auto/new-activities
           TITLE="New activities: $NAMES"
-          if [ -n "$(gh pr list --head auto/new-activities --state open --json number --jq '.[].number')" ]; then
-            gh pr edit auto/new-activities --title "$TITLE" --body-file "$RUNNER_TEMP/pr-body.md"
-          elif gh pr create --base main --head auto/new-activities --title "$TITLE" --body-file "$RUNNER_TEMP/pr-body.md"; then
+          if gh pr create --base main --head auto/new-activities --title "$TITLE" --body-file "$RUNNER_TEMP/pr-body.md"; then
             echo "Pull request opened."
           else
             # GitHub only lets workflows open pull requests if "Allow GitHub Actions to create
