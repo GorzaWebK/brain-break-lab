@@ -219,40 +219,123 @@ async function draft({ repo, url }) {
       enabled: !chat,
     },
     notes: { repo: repo.html_url, controlsFrom, chat },
+    repo, html,
   };
 }
 
-// ---- 3. Thumbnails: a 640x360 WebP screenshot of each activity ----
-async function thumbnails(entries) {
+// ---- 3. Thumbnails ----
+// Like the hand-made ones: a real scene from the activity, cropped in from the
+// edges (where scores and buttons usually sit), with a dark fade along the
+// bottom and the title lettered over it.
+//  1. A gameplay screenshot from the project's own repo (docs/, screenshots/ ...).
+//  2. Otherwise its social preview image (og:image), used as it is: it
+//     usually carries its own title art already.
+//  3. Otherwise a screenshot of the live page.
+const NOT_A_SCENE = /(icon|favicon|logo|phone|mobile|menu|title|game-?over|button|play\.png|palette|sound|divider|sprite|texture|font|avatar|badge|qr|editor|settings|leaderboard|complete|approved|character|garage|tickets|tracks|diplomacy|technology|banner|node_modules)/i;
+const KEY_ART = /(^|\/)(og|og-image|social|social-preview|cover|preview|hero|share)\.(png|jpe?g|webp)$/i;
+const SCENE_HINT = /(gameplay|playing|run|action|shot|screenshot|in-?game|mid|race|chase|swing|traffic|sneak|danger)/i;
+
+async function fetchBuf(url) {
+  const res = await fetch(url, { headers: { 'user-agent': 'activities-scan' }, signal: AbortSignal.timeout(20000) });
+  if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
+  return Buffer.from(await res.arrayBuffer());
+}
+
+async function pickRepoImage(sharp, repo, html, url) {
+  let paths = [];
+  try {
+    const tree = await gh(`/repos/${repo.full_name}/git/trees/${repo.default_branch}?recursive=1`);
+    paths = tree.tree.filter(t => t.type === 'blob' && /\.(png|jpe?g|webp|gif)$/i.test(t.path) && t.size > 20000).map(t => t.path);
+  } catch {}
+  const raw = p => `https://raw.githubusercontent.com/${repo.full_name}/${repo.default_branch}/${p.split('/').map(encodeURIComponent).join('/')}`;
+  const scenes = paths.filter(p => !NOT_A_SCENE.test(p) && !KEY_ART.test(p))
+    .sort((a, b) => (SCENE_HINT.test(b) - SCENE_HINT.test(a)) || (/\.gif$/i.test(a) - /\.gif$/i.test(b)))
+    .slice(0, 12);
+  for (const p of scenes) {
+    try {
+      const buf = await fetchBuf(raw(p));
+      const m = await sharp(buf, { pages: 1 }).metadata();
+      const ratio = m.width / m.height;
+      if (m.width >= 640 && ratio > 1.3 && ratio < 2.1) return { buf, keyArt: false, from: `\`${p}\` from the project's repo` };
+    } catch {}
+  }
+  const og = (html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)/i) || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i) || [])[1];
+  const keyArtCandidates = [og && new URL(og, url).href, ...paths.filter(p => KEY_ART.test(p)).map(raw)].filter(Boolean);
+  for (const u of keyArtCandidates) {
+    try {
+      const buf = await fetchBuf(u);
+      const m = await sharp(buf).metadata();
+      if (m.width >= 600 && m.width / m.height > 1.3) return { buf, keyArt: true, from: `the project's social preview image (${u})` };
+    } catch {}
+  }
+  return null;
+}
+
+const xml = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+function titleOverlay(title, accent) {
+  const size = Math.round(Math.min(60, 560 / (title.length * 0.62)));
+  const font = 'Segoe UI Black, Arial Black, DejaVu Sans, Liberation Sans, sans-serif';
+  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360">
+    <defs><linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".78"/></linearGradient></defs>
+    <rect width="640" height="360" fill="url(#f)"/>
+    <rect x="30" y="${334 - size - 14}" width="48" height="6" rx="3" fill="${accent}"/>
+    <text x="32" y="337" font-family="${font}" font-weight="900" font-size="${size}" fill="#000" opacity=".6">${xml(title)}</text>
+    <text x="30" y="334" font-family="${font}" font-weight="900" font-size="${size}" fill="#fff">${xml(title)}</text></svg>`);
+}
+
+// Crop the largest 16:9 area from the middle; for screenshots, trim 12% off every edge too.
+async function frame(sharp, buf, trim) {
+  const m = await sharp(buf, { pages: 1 }).metadata();
+  let w = m.width, h = Math.round(w * 9 / 16);
+  if (h > m.height) { h = m.height; w = Math.round(h * 16 / 9); }
+  if (trim) { w = Math.round(w * .76); h = Math.round(h * .76); }
+  const left = Math.round((m.width - w) / 2), top = Math.round((m.height - h) / 2);
+  return sharp(buf, { pages: 1 }).extract({ left, top, width: w, height: h }).resize(640, 360, { kernel: 'lanczos3' }).sharpen({ sigma: .6 }).png().toBuffer();
+}
+
+async function thumbnails(drafts) {
   let pw;
   try { pw = await import('playwright'); } catch { pw = await import('playwright-core'); }
   const sharp = (await import('sharp')).default;
-  const browser = await pw.chromium.launch(process.env.BROWSER_CHANNEL ? { channel: process.env.BROWSER_CHANNEL } : {});
-  for (const e of entries) {
-    const file = join(root, e.thumbnail);
-    let png;
-    try {
-      const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
-      await page.goto(e.url, { waitUntil: 'networkidle', timeout: 30000 }).catch(() => {});
-      await page.waitForTimeout(4000);
-      png = await page.screenshot();
-      await page.close();
-    } catch (err) {
-      console.log(`- ${e.id}: screenshot failed (${err.message}), using a plain title card`);
-      const t = e.title.replace(/[<&>]/g, '');
-      png = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720"><rect width="100%" height="100%" fill="#2f4858"/><text x="640" y="380" font-family="sans-serif" font-size="96" fill="#fff" text-anchor="middle">${t}</text></svg>`);
+  let browser;
+  for (const d of drafts) {
+    const e = d.entry, file = join(root, e.thumbnail);
+    let img, keyArt = false;
+    const pick = await pickRepoImage(sharp, d.repo, d.html, e.url);
+    if (pick) {
+      img = await frame(sharp, pick.buf, !pick.keyArt);
+      keyArt = pick.keyArt;
+      d.notes.thumbFrom = pick.from;
+    } else {
+      try {
+        browser ||= await pw.chromium.launch(process.env.BROWSER_CHANNEL ? { channel: process.env.BROWSER_CHANNEL } : {});
+        const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+        await page.goto(e.url, { waitUntil: 'networkidle', timeout: 30000 }).catch(() => {});
+        await page.waitForTimeout(4000);
+        img = await frame(sharp, await page.screenshot(), false);
+        await page.close();
+        d.notes.thumbFrom = 'a screenshot of the live page (the repo has no gameplay screenshots)';
+      } catch (err) {
+        img = await sharp({ create: { width: 640, height: 360, channels: 3, background: '#2c1f78' } }).png().toBuffer();
+        d.notes.thumbFrom = `a plain background (the live page couldn't be captured: ${err.message})`;
+      }
     }
-    for (const quality of [72, 55, 40]) {
-      await sharp(png).resize(640, 360).webp({ quality }).toFile(file);
+    if (!keyArt) {
+      const { dominant: c } = await sharp(img).stats();
+      const accent = (c.r + c.g + c.b) / 3 > 60 ? `rgb(${c.r},${c.g},${c.b})` : '#ffc93c';
+      img = await sharp(img).composite([{ input: titleOverlay(e.title, accent) }]).png().toBuffer();
+    }
+    for (const quality of [80, 68, 55, 42]) {
+      await sharp(img).webp({ quality }).toFile(file);
       if (statSync(file).size <= 80 * 1024) break;
     }
   }
-  await browser.close();
+  if (browser) await browser.close();
 }
 
 const drafts = [];
 for (const f of found) drafts.push(await draft(f));
-await thumbnails(drafts.map(d => d.entry));
+await thumbnails(drafts);
 list.push(...drafts.map(d => d.entry));
 writeFileSync(join(root, 'activities.json'), JSON.stringify(list, null, 2) + '\n');
 console.log(`Added ${drafts.length}: ${drafts.map(d => d.entry.id).join(', ')}`);
@@ -275,6 +358,7 @@ if (bodyFile) {
       `- Description: ${e.description}`,
       `- Devices: ${e.devices.join(', ')}${e.pcOnly ? ' (computer only)' : ''}`,
       `- Controls: ${n.controlsFrom}`,
+      `- Thumbnail: made from ${n.thumbFrom}`,
       `- Online features: ${e.hasOnline ? e.onlineNote : 'none found'}`,
       `- Switched on after merge: **${yes(e.enabled)}**${n.chat ? ' — it looks like it has **text chat with other players**, so it starts switched off. Set `"enabled": true` for it in `activities.json` to show it.' : ''}`,
       '',

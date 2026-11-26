@@ -46,7 +46,7 @@ Other activities with online features (leaderboards, nicknames, online matches) 
 Once a day, `.github/workflows/new-activities.yml` checks the GitHub accounts listed under `"watch"` in `site-config.json` (GorzaWebK and GorzaWebA) for public projects with a live GitHub Pages site that aren't on Brain Break Lab yet. For each one it:
 
 - drafts an `activities.json` entry from the project's README and code (description, a guessed category, controls, devices, online features);
-- takes a 640x360 WebP screenshot for the thumbnail;
+- makes a 640x360 WebP thumbnail in the same style as the others: a real scene from the activity with its title along the bottom. It uses a gameplay screenshot from the project's own repo if there is one (cropped in from the edges, where scores and buttons usually sit), otherwise its social preview image, otherwise a screenshot of the live page. The issue says which image it used;
 - puts them on the branch `auto/new-activities` and tells you about it with an issue called **New activities: …** (or updates the open one). The issue has a link: click it, then **Create pull request**, then **Merge**.
 
 GitHub doesn't let workflows open pull requests on their own unless **Settings → Actions → General → Allow GitHub Actions to create and approve pull requests** is ticked. If you tick it, you get a ready-made pull request instead of the issue. It's off by default because it also lets workflows approve pull requests.
