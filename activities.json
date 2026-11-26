@@ -663,5 +663,59 @@
     "hasOnline": false,
     "onlineNote": "",
     "enabled": true
+  },
+  {
+    "id": "fossil-fixers",
+    "title": "Fossil Fixers",
+    "description": "Dig up fossil bones, rebuild the skeletons and fill your own museum. Read the clues in the rock and plan each dig carefully, because energy is limited.",
+    "category": "Logic",
+    "url": "https://gorzawebk.github.io/fossil-fixers/",
+    "thumbnail": "assets/thumbs/fossil-fixers.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "mouse",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Pick a tool",
+        "how": "Tap a pocket in the tool roll, or keys 1–0 (B brush, C chisel, P pickaxe, T tap hammer, S scanner)"
+      },
+      {
+        "action": "Use the tool",
+        "how": "Click or tap a square, or arrow keys then Space / Enter"
+      },
+      {
+        "action": "Move a bone (rebuilding)",
+        "how": "Drag it, or Tab, arrow keys and Enter"
+      },
+      {
+        "action": "Turn a bone",
+        "how": "Turn button, double-tap, right-click or mouse wheel, or R / E and Q"
+      },
+      {
+        "action": "Get a hint",
+        "how": "Hint button or H"
+      },
+      {
+        "action": "Walk along the museum",
+        "how": "Drag, swipe, mouse wheel or ← →"
+      },
+      {
+        "action": "Back / pack up",
+        "how": "Buttons on screen or Esc"
+      }
+    ],
+    "noTimer": true,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
   }
 ]
