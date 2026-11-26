@@ -667,7 +667,7 @@
   {
     "id": "fossil-fixers",
     "title": "Fossil Fixers",
-    "description": "Dig up fossil bones, rebuild skeletons and fill your own museum. A free puzzle activity for the browser.",
+    "description": "Dig up fossil bones, rebuild the skeletons and fill your own museum. Read the clues in the rock and plan each dig carefully, because energy is limited.",
     "category": "Logic",
     "url": "https://gorzawebk.github.io/fossil-fixers/",
     "thumbnail": "assets/thumbs/fossil-fixers.webp",
@@ -683,31 +683,35 @@
     ],
     "controls": [
       {
-        "action": "appear on rock that hides a bone once you dig within two squares of it. Hard lumps called concretions look bumpy too.",
-        "how": "Bumps and pale flecks"
+        "action": "Pick a tool",
+        "how": "Tap a pocket in the tool roll, or keys 1–0 (B brush, C chisel, P pickaxe, T tap hammer, S scanner)"
       },
       {
-        "action": "sand, sandstone, ironstone",
-        "how": "Desert Badlands"
+        "action": "Use the tool",
+        "how": "Click or tap a square, or arrow keys then Space / Enter"
       },
       {
-        "action": "shingle, chalk, flint, blue clay",
-        "how": "Sea Cliffs"
+        "action": "Move a bone (rebuilding)",
+        "how": "Drag it, or Tab, arrow keys and Enter"
       },
       {
-        "action": "mud, silt, gravel, root tangles",
-        "how": "Jungle Riverbed"
+        "action": "Turn a bone",
+        "how": "Turn button, double-tap, right-click or mouse wheel, or R / E and Q"
       },
       {
-        "action": "snow, permafrost, old ice, frozen gravel",
-        "how": "Frozen Tundra"
+        "action": "Get a hint",
+        "how": "Hint button or H"
       },
       {
-        "action": "ash, tuff, pumice, basalt",
-        "how": "Volcano Ridge"
+        "action": "Walk along the museum",
+        "how": "Drag, swipe, mouse wheel or ← →"
+      },
+      {
+        "action": "Back / pack up",
+        "how": "Buttons on screen or Esc"
       }
     ],
-    "noTimer": false,
+    "noTimer": true,
     "needsSound": false,
     "pcOnly": false,
     "hasOnline": false,
