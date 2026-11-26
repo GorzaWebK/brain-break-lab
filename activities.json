@@ -663,5 +663,55 @@
     "hasOnline": false,
     "onlineNote": "",
     "enabled": true
+  },
+  {
+    "id": "fossil-fixers",
+    "title": "Fossil Fixers",
+    "description": "Dig up fossil bones, rebuild skeletons and fill your own museum. A free puzzle activity for the browser.",
+    "category": "Logic",
+    "url": "https://gorzawebk.github.io/fossil-fixers/",
+    "thumbnail": "assets/thumbs/fossil-fixers.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "mouse",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "appear on rock that hides a bone once you dig within two squares of it. Hard lumps called concretions look bumpy too.",
+        "how": "Bumps and pale flecks"
+      },
+      {
+        "action": "sand, sandstone, ironstone",
+        "how": "Desert Badlands"
+      },
+      {
+        "action": "shingle, chalk, flint, blue clay",
+        "how": "Sea Cliffs"
+      },
+      {
+        "action": "mud, silt, gravel, root tangles",
+        "how": "Jungle Riverbed"
+      },
+      {
+        "action": "snow, permafrost, old ice, frozen gravel",
+        "how": "Frozen Tundra"
+      },
+      {
+        "action": "ash, tuff, pumice, basalt",
+        "how": "Volcano Ridge"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
   }
 ]
