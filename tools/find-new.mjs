@@ -100,11 +100,12 @@ const KEYISH = /arrow|key|space|click|tap|wasd|mouse|drag|swipe|shift|enter|esc|
 function readmeControls(md) {
   const lines = md.split('\n');
   // Prefer a "Controls" section; "How to play" is only a fallback (it is often prose).
-  let start = lines.findIndex(l => /^#{1,6}\s*(controls|keys|keyboard)\b/i.test(l));
-  if (start < 0) start = lines.findIndex(l => /^#{1,6}\s*(how to play|how to use)/i.test(l));
+  // Headings may carry symbols or numbers first, e.g. "## ⊕ II. Controls".
+  let start = lines.findIndex(l => /^#{1,6}\s.*\b(controls|keys|keyboard)\b/i.test(l));
+  if (start < 0) start = lines.findIndex(l => /^#{1,6}\s.*\b(how to play|how to use)\b/i.test(l));
   if (start < 0) return [];
   const rows = [];
-  let lastWasTable = false;
+  let lastWasTable = false, sawTable = false;
   for (const raw of lines.slice(start + 1)) {
     if (/^#{1,6}\s/.test(raw)) break;
     let a, b;
@@ -113,9 +114,11 @@ function readmeControls(md) {
       if (/^\|[\s:|-]+\|$/.test(l)) { if (lastWasTable) rows.pop(); lastWasTable = false; continue; } // header row
       const cells = l.split('|').slice(1, -1).map(c => stripMd(c)).filter(Boolean);
       if (cells.length < 2) continue;
-      // First column is usually the action; join the rest (e.g. "Mouse / touch" and "Keyboard").
-      [a, b] = [cells[0], cells.slice(1).join(', or ')];
-      lastWasTable = true;
+      // First column is usually the action; join the next few (e.g. "Mouse / touch" and "Keyboard").
+      [a, b] = [cells[0], [...new Set(cells.slice(1, 4))].join(', or ')];
+      lastWasTable = sawTable = true;
+    } else if (sawTable) {
+      break; // only the first table: later ones are usually extra modes (e.g. a 2-player race)
     } else {
       const m = l.match(/^[-*+]\s+(.+?)\s+(?:[—–-]|:)\s+(.+)$/) || l.match(/^[-*+]\s+\*\*(.+?)\*\*:?\s*(.+)$/);
       if (!m) continue;
