@@ -717,5 +717,117 @@
     "hasOnline": false,
     "onlineNote": "",
     "enabled": true
+  },
+  {
+    "id": "overprint",
+    "title": "Overprint",
+    "description": "Two ink blots, Pinky and Teal, work through the pages of a printed zine. Each can only stand on its own colour or purple, so pull levers and swap between them to reach the end of every page.",
+    "category": "Logic",
+    "url": "https://gorzawebk.github.io/overprint/",
+    "thumbnail": "assets/thumbs/overprint.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "mouse",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Move",
+        "how": "A / D (Pinky) or ← / → (Teal), or the ◀ ▶ tabs"
+      },
+      {
+        "action": "Jump",
+        "how": "W or ↑, or ▲ JUMP"
+      },
+      {
+        "action": "Use a lever / press a stamp",
+        "how": "S or ↓, or ✦ USE"
+      },
+      {
+        "action": "Swap blot (one player)",
+        "how": "Tab or Q, or ⇄ SWAP"
+      },
+      {
+        "action": "Undo last shift",
+        "how": "Z, or ↶ in the margin"
+      },
+      {
+        "action": "Restart page",
+        "how": "R, or ↻ in the margin"
+      },
+      {
+        "action": "Pause",
+        "how": "Esc or P"
+      },
+      {
+        "action": "Sound on / off",
+        "how": "M"
+      }
+    ],
+    "noTimer": true,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  },
+  {
+    "id": "wobbleworks",
+    "title": "Wobbleworks",
+    "description": "Build wobbly bridges, ramps and gadgets from planks, rope, springs, balloons, wheels and sticky pads, then press Go! and watch Wob the jelly blob roll to the flag.",
+    "category": "Physics",
+    "url": "https://gorzawebk.github.io/wobbleworks/",
+    "thumbnail": "assets/thumbs/wobbleworks.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "mouse",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Place a part",
+        "how": "Drag from one point to another (tap for balloons, wheels, sticky pads), or Move the cursor with WASD or arrows, Q / E to turn it, F to change length, Space (or Enter) to place"
+      },
+      {
+        "action": "Choose a part",
+        "how": "Tap it in the wooden tray, or 1–7, or R for the next one"
+      },
+      {
+        "action": "Rub out a part",
+        "how": "Rubber tool, or right-click the part, or Rubber tool + Space"
+      },
+      {
+        "action": "Undo / redo",
+        "how": "↶ ↷ buttons, or Ctrl+Z / Ctrl+Y (or X)"
+      },
+      {
+        "action": "Go! / Stop",
+        "how": "The big orange button, or G"
+      },
+      {
+        "action": "Zoom and pan",
+        "how": "Pinch and two-finger drag, mouse wheel, or the ± buttons"
+      },
+      {
+        "action": "Pause",
+        "how": "❚❚ button, or Esc or P"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
   }
 ]
