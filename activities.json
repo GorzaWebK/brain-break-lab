@@ -721,7 +721,7 @@
   {
     "id": "overprint",
     "title": "Overprint",
-    "description": "A co-op puzzle-platformer printed in two inks inside a risograph zine. Pinky stands on pink, Teal stands on teal, and purple holds you both.",
+    "description": "Two ink blots, Pinky and Teal, work through the pages of a printed zine. Each can only stand on its own colour or purple, so pull levers and swap between them to reach the end of every page.",
     "category": "Logic",
     "url": "https://gorzawebk.github.io/overprint/",
     "thumbnail": "assets/thumbs/overprint.webp",
@@ -738,22 +738,38 @@
     "controls": [
       {
         "action": "Move",
-        "how": "Arrow keys or W A S D"
+        "how": "A / D (Pinky) or ← / → (Teal), or the ◀ ▶ tabs"
       },
       {
-        "action": "Main action",
-        "how": "Space"
+        "action": "Jump",
+        "how": "W or ↑, or ▲ JUMP"
       },
       {
-        "action": "Select / aim",
-        "how": "Mouse"
+        "action": "Use a lever / press a stamp",
+        "how": "S or ↓, or ✦ USE"
       },
       {
-        "action": "On a tablet",
-        "how": "Tap or drag on the screen"
+        "action": "Swap blot (one player)",
+        "how": "Tab or Q, or ⇄ SWAP"
+      },
+      {
+        "action": "Undo last shift",
+        "how": "Z, or ↶ in the margin"
+      },
+      {
+        "action": "Restart page",
+        "how": "R, or ↻ in the margin"
+      },
+      {
+        "action": "Pause",
+        "how": "Esc or P"
+      },
+      {
+        "action": "Sound on / off",
+        "how": "M"
       }
     ],
-    "noTimer": false,
+    "noTimer": true,
     "needsSound": false,
     "pcOnly": false,
     "hasOnline": false,
@@ -764,7 +780,7 @@
     "id": "wobbleworks",
     "title": "Wobbleworks",
     "description": "Build wobbly bridges, ramps and gadgets from planks, rope, springs, balloons, wheels and sticky pads, then press Go! and watch Wob the jelly blob roll to the flag.",
-    "category": "Strategy",
+    "category": "Physics",
     "url": "https://gorzawebk.github.io/wobbleworks/",
     "thumbnail": "assets/thumbs/wobbleworks.webp",
     "devices": [
@@ -804,11 +820,7 @@
       },
       {
         "action": "Pause",
-        "how": "❚❚ button, or Esc or P (the activity also pauses when you switch tab)"
-      },
-      {
-        "action": "Player 1",
-        "how": "Player 2"
+        "how": "❚❚ button, or Esc or P"
       }
     ],
     "noTimer": false,
