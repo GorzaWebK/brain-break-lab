@@ -1,17 +1,20 @@
 name: Look for new activities
 
 # Once a day, check the GitHub accounts in site-config.json ("watch") for new
-# GitHub Pages projects. If there are any, draft entries + thumbnails and open
-# (or update) a pull request. Merging it publishes them.
+# GitHub Pages projects. Any that are found are added to activities.json (with a
+# thumbnail), committed straight to this branch and published. An issue lists
+# what was added, so whoever looks after the site hears about it.
+# Anything that looks like it has text chat with other players is added
+# switched off ("enabled": false).
 on:
   schedule:
     - cron: '23 6 * * *'
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
-  issues: write
+  contents: write   # commit the new entries
+  actions: write    # start the deploy workflow
+  issues: write     # tell you what was added
 
 concurrency:
   group: new-activities
@@ -25,26 +28,6 @@ jobs:
         with:
           node-version: 22
 
-      # If a suggestion is still open (a pull request, or an issue when workflows
-      # can't open pull requests), build on its branch so any edits made to it are
-      # kept, and only projects it doesn't already include are added.
-      - name: Carry on from an open suggestion
-        id: open
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          PR="$(gh pr list --head auto/new-activities --state open --json number --jq '.[0].number')"
-          ISSUE="$(gh issue list --state open --search 'in:title "New activities"' --json number --jq '.[0].number')"
-          if { [ -n "$PR" ] || [ -n "$ISSUE" ]; } && git ls-remote --exit-code --heads origin auto/new-activities > /dev/null; then
-            MAIN_SHA="$(git rev-parse HEAD)"
-            git fetch origin auto/new-activities
-            git checkout -B auto/new-activities origin/auto/new-activities
-            git checkout "$MAIN_SHA" -- tools   # always run the latest scanner and checks from main
-            echo "pr=$PR" >> "$GITHUB_OUTPUT"
-            echo "issue=$ISSUE" >> "$GITHUB_OUTPUT"
-            echo "Carrying on from the open suggestion (pull request: ${PR:-none}, issue: ${ISSUE:-none})."
-          fi
-
       - name: Look for new Pages projects
         id: look
         run: node tools/find-new.mjs --list
@@ -57,55 +40,31 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.49.1 sharp@0.33.5
           npx playwright install --with-deps chromium
 
-      - name: Draft entries and thumbnails
+      - name: Add entries and thumbnails
         if: steps.look.outputs.count != '0'
-        run: node tools/find-new.mjs --write --body "$RUNNER_TEMP/pr-body.md"
+        run: node tools/find-new.mjs --write --body "$RUNNER_TEMP/added.md"
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
+      # Same check the deploy runs. If it fails, nothing is committed.
       - name: Check activities.json
         if: steps.look.outputs.count != '0'
         run: node tools/check.mjs
 
-      - name: Open or update the pull request
+      - name: Commit, publish and report
         if: steps.look.outputs.count != '0'
         env:
           GH_TOKEN: ${{ github.token }}
           NAMES: ${{ steps.look.outputs.names }}
-          OPEN_PR: ${{ steps.open.outputs.pr }}
-          OPEN_ISSUE: ${{ steps.open.outputs.issue }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -B auto/new-activities
           git add activities.json assets/thumbs
           git commit -m "Add new activities: $NAMES"
-          if [ -n "$OPEN_PR" ] || [ -n "$OPEN_ISSUE" ]; then
-            # Adding to an open suggestion: keep what's there and post the new drafts as a comment.
-            git push origin auto/new-activities
-            if [ -n "$OPEN_PR" ]; then
-              gh pr edit "$OPEN_PR" --title "$(gh pr view "$OPEN_PR" --json title --jq .title), $NAMES"
-              gh pr comment "$OPEN_PR" --body-file "$RUNNER_TEMP/pr-body.md"
-            else
-              gh issue edit "$OPEN_ISSUE" --title "$(gh issue view "$OPEN_ISSUE" --json title --jq .title), $NAMES"
-              gh issue comment "$OPEN_ISSUE" --body-file "$RUNNER_TEMP/pr-body.md"
-            fi
-            exit 0
-          fi
-          git push --force origin auto/new-activities
-          TITLE="New activities: $NAMES"
-          if gh pr create --base main --head auto/new-activities --title "$TITLE" --body-file "$RUNNER_TEMP/pr-body.md"; then
-            echo "Pull request opened."
-          else
-            # GitHub only lets workflows open pull requests if "Allow GitHub Actions to create
-            # and approve pull requests" is ticked (Settings > Actions > General). Otherwise,
-            # open an issue with a one-click link to create the pull request instead.
-            LINK="https://github.com/$GITHUB_REPOSITORY/compare/main...auto/new-activities?expand=1"
-            { echo "**[Click here, then Create pull request, then Merge]($LINK)** to put these on the site."; echo; cat "$RUNNER_TEMP/pr-body.md"; } > "$RUNNER_TEMP/issue-body.md"
-            ISSUE="$(gh issue list --state open --search 'in:title "New activities"' --json number --jq '.[0].number')"
-            if [ -n "$ISSUE" ]; then
-              gh issue edit "$ISSUE" --title "$TITLE" --body-file "$RUNNER_TEMP/issue-body.md"
-            else
-              gh issue create --title "$TITLE" --body-file "$RUNNER_TEMP/issue-body.md"
-            fi
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
+          # A push made by a workflow doesn't start other workflows, so start the deploy here.
+          gh workflow run deploy.yml --ref "$GITHUB_REF_NAME"
+          if [ "$GITHUB_REF_NAME" = "${{ github.event.repository.default_branch }}" ]; then
+            gh issue create --title "Added to the site: $NAMES" --body-file "$RUNNER_TEMP/added.md"
           fi

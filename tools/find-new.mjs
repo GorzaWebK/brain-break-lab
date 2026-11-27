@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 // Looks for new GitHub Pages projects on the accounts listed in site-config.json ("watch")
-// and drafts activities.json entries for any that aren't on the site yet.
+// and adds activities.json entries for any that aren't on the site yet.
 //
 //   node tools/find-new.mjs --list                  just report what's new (no packages needed)
 //   node tools/find-new.mjs --write [--body file]   also add entries + thumbnails, and write a
-//                                                   pull-request description to "file"
+//                                                   summary of what was added to "file"
 //
 // --write needs the packages "playwright" (or "playwright-core") and "sharp" for thumbnails.
-// The daily workflow (.github/workflows/new-activities.yml) installs them and opens a pull request.
+// The daily workflow (.github/workflows/new-activities.yml) installs them, commits the new
+// entries, publishes the site and opens an issue listing what was added.
 // Set GITHUB_TOKEN to avoid GitHub's low rate limit for anonymous requests.
 
 import { readFileSync, writeFileSync, appendFileSync, statSync } from 'node:fs';
@@ -348,30 +349,28 @@ writeFileSync(join(root, 'activities.json'), JSON.stringify(list, null, 2) + '\n
 console.log(`Added ${drafts.length}: ${drafts.map(d => d.entry.id).join(', ')}`);
 
 if (bodyFile) {
-  const yes = b => (b ? 'yes' : 'no');
+  const site = `https://${(process.env.GITHUB_REPOSITORY_OWNER || 'gorzawebk').toLowerCase()}.github.io/${(process.env.GITHUB_REPOSITORY || '/brain-break-lab').split('/')[1]}/`;
   const body = [
-    `New GitHub Pages projects were found on ${accounts.join(' / ')}, and draft entries were added for them.`,
+    `New GitHub Pages projects were found on ${accounts.join(' / ')} and **added to the site**. It republishes on its own within a few minutes.`,
     '',
-    '**Merge this pull request to put them on the site.** The site redeploys on its own after the merge.',
-    '',
-    'The descriptions, categories and controls are filled in automatically from each project\'s README and code, so please give them a quick look first (open **Files changed**, then the **...** menu on `activities.json`** to edit).',
+    'Descriptions, categories and controls were filled in automatically from each project\'s README and code, so they may need a tidy. Nothing needs doing unless something looks wrong. You can close this issue once you\'ve read it.',
     '',
     ...drafts.flatMap(({ entry: e, notes: n }) => [
       `### ${e.title}`,
       '',
+      `- On the site: ${e.enabled ? `${site}activity.html?id=${e.id}` : '**switched off** (see below)'}`,
       `- Project: ${n.repo}`,
-      `- Live: ${e.url}`,
       `- Category: **${e.category}** (guessed)`,
       `- Description: ${e.description}`,
       `- Devices: ${e.devices.join(', ')}${e.pcOnly ? ' (computer only)' : ''}`,
       `- Controls: ${n.controlsFrom}`,
       `- Thumbnail: made from ${n.thumbFrom}`,
       `- Online features: ${e.hasOnline ? e.onlineNote : 'none found'}`,
-      `- Switched on after merge: **${yes(e.enabled)}**${n.chat ? ' — it looks like it has **text chat with other players**, so it starts switched off. Set `"enabled": true` for it in `activities.json` to show it.' : ''}`,
+      ...(n.chat ? ['- **It looks like it has text chat with other players, so it was added switched off.** To show it, set `"enabled": true` for it in `activities.json`.'] : []),
       '',
     ]),
     '---',
-    'Don\'t want one of these? Delete its entry and thumbnail from this pull request, and add its repository name to `"watch" → "ignore"` in `site-config.json` so it isn\'t suggested again. If you close this pull request without merging, the same projects will be suggested again tomorrow.',
+    'To take one off the site, set `"enabled": false` for it in `activities.json`. To stop a project being added at all, add its repository name to `"watch" → "ignore"` in `site-config.json`.',
   ].join('\n');
   writeFileSync(bodyFile, body + '\n');
 }
