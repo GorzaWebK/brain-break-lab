@@ -717,5 +717,105 @@
     "hasOnline": false,
     "onlineNote": "",
     "enabled": true
+  },
+  {
+    "id": "overprint",
+    "title": "Overprint",
+    "description": "A co-op puzzle-platformer printed in two inks inside a risograph zine. Pinky stands on pink, Teal stands on teal, and purple holds you both.",
+    "category": "Logic",
+    "url": "https://gorzawebk.github.io/overprint/",
+    "thumbnail": "assets/thumbs/overprint.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "mouse",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Move",
+        "how": "Arrow keys or W A S D"
+      },
+      {
+        "action": "Main action",
+        "how": "Space"
+      },
+      {
+        "action": "Select / aim",
+        "how": "Mouse"
+      },
+      {
+        "action": "On a tablet",
+        "how": "Tap or drag on the screen"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
+  },
+  {
+    "id": "wobbleworks",
+    "title": "Wobbleworks",
+    "description": "Build wobbly bridges, ramps and gadgets from planks, rope, springs, balloons, wheels and sticky pads, then press Go! and watch Wob the jelly blob roll to the flag.",
+    "category": "Strategy",
+    "url": "https://gorzawebk.github.io/wobbleworks/",
+    "thumbnail": "assets/thumbs/wobbleworks.webp",
+    "devices": [
+      "computer",
+      "tablet",
+      "phone"
+    ],
+    "inputs": [
+      "keyboard",
+      "mouse",
+      "touch"
+    ],
+    "controls": [
+      {
+        "action": "Place a part",
+        "how": "Drag from one point to another (tap for balloons, wheels, sticky pads), or Move the cursor with WASD or arrows, Q / E to turn it, F to change length, Space (or Enter) to place"
+      },
+      {
+        "action": "Choose a part",
+        "how": "Tap it in the wooden tray, or 1–7, or R for the next one"
+      },
+      {
+        "action": "Rub out a part",
+        "how": "Rubber tool, or right-click the part, or Rubber tool + Space"
+      },
+      {
+        "action": "Undo / redo",
+        "how": "↶ ↷ buttons, or Ctrl+Z / Ctrl+Y (or X)"
+      },
+      {
+        "action": "Go! / Stop",
+        "how": "The big orange button, or G"
+      },
+      {
+        "action": "Zoom and pan",
+        "how": "Pinch and two-finger drag, mouse wheel, or the ± buttons"
+      },
+      {
+        "action": "Pause",
+        "how": "❚❚ button, or Esc or P (the activity also pauses when you switch tab)"
+      },
+      {
+        "action": "Player 1",
+        "how": "Player 2"
+      }
+    ],
+    "noTimer": false,
+    "needsSound": false,
+    "pcOnly": false,
+    "hasOnline": false,
+    "onlineNote": "",
+    "enabled": true
   }
 ]
